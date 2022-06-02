@@ -67,6 +67,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       color: Colors.amber)),
             ),
 
+            const SizedBox(
+              height: 50,
+            ),
             // NUMBER_FIELD
             TextFormField(
               style: const TextStyle(
@@ -81,12 +84,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       fontWeight: FontWeight.normal,
                       color: Colors.red)),
             ),
-
+            const SizedBox(
+              height: 50,
+            ),
             //DROPDOWN
             DropdownButton(
               isExpanded: true,
               value: dropdownValue,
-              icon: const Icon(Icons.arrow_downward),
+              icon: const Icon(Icons.arrow_drop_down_outlined),
               elevation: 16,
               style: const TextStyle(color: Colors.deepPurple),
               underline: Container(
@@ -119,7 +124,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 });
               },
             ),
-
+            const SizedBox(
+              height: 50,
+            ),
             //RADIO
 
             Column(
@@ -133,6 +140,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       color: Color.fromARGB(255, 23, 211, 186)),
                 ),
                 ListTile(
+                  horizontalTitleGap: 10,
+                  contentPadding: const EdgeInsets.only(right: 0),
                   title: const Text('male'),
                   leading: Radio<GenderCharacter>(
                     value: GenderCharacter.male,
@@ -145,6 +154,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 ListTile(
+                  horizontalTitleGap: 10,
+                  contentPadding: const EdgeInsets.only(right: 0),
                   title: const Text('female'),
                   leading: Radio<GenderCharacter>(
                     value: GenderCharacter.female,
@@ -157,6 +168,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 ListTile(
+                  horizontalTitleGap: 10,
+                  contentPadding: const EdgeInsets.only(right: 0),
                   title: const Text('others'),
                   leading: Radio<GenderCharacter>(
                     value: GenderCharacter.others,
@@ -170,7 +183,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-
+            const SizedBox(
+              height: 50,
+            ),
             //CHECKBOX
 
             Column(
@@ -255,7 +270,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-
+            const SizedBox(
+              height: 50,
+            ),
             //DATE_PICKER
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -273,31 +290,35 @@ class _MyHomePageState extends State<MyHomePage> {
                         });
                       });
                     },
-                    child: const Text(
-                      "* Date of Birth *",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.white),
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      color: Colors.grey[800],
+                      child: const Text(
+                        "*  Select Date_of_Birth *",
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.white),
+                      ),
                     )),
                 Row(
                   children: [
                     const Text(
-                      "∆  ",
+                      "   ∆  ",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.normal,
                           color: Colors.lightGreenAccent),
                     ),
                     Text(
-                      "${_dateTime.day}/",
+                      "${_dateTime.day}/ ",
                       style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.normal,
                           color: Colors.yellow),
                     ),
                     Text(
-                      "${_dateTime.month}/",
+                      "${_dateTime.month}/ ",
                       style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.normal,
