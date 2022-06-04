@@ -1,3 +1,6 @@
+import 'dart:developer';
+// import 'package:intl/intl.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -31,9 +34,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   DateTime _dateTime = DateTime.now();
+  DateTimeRange dateRange =
+      DateTimeRange(start: DateTime.now(), end: DateTime.now());
+  // String dateRange = "";
   bool isChecked1 = false;
   bool isChecked2 = false;
   bool isChecked3 = false;
+
+  DateTime? start = DateTime.now();
+  DateTime? end = DateTime.now();
 
   GenderCharacter? _character = GenderCharacter.male;
 
@@ -41,6 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // DateTime? end = dateRange.end;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -53,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            // TEXT_FIELD
+            // TEXT_FIELD:
             TextFormField(
               style: const TextStyle(
                   fontSize: 20,
@@ -68,9 +79,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             const SizedBox(
-              height: 50,
+              height: 60,
             ),
-            // NUMBER_FIELD
+            // NUMBER_FIELD:
             TextFormField(
               style: const TextStyle(
                   fontSize: 20,
@@ -85,18 +96,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       color: Colors.red)),
             ),
             const SizedBox(
-              height: 50,
+              height: 60,
             ),
-            //DROPDOWN
+            //DROPDOWN:
             DropdownButton(
               isExpanded: true,
               value: dropdownValue,
               icon: const Icon(Icons.arrow_drop_down_outlined),
               elevation: 16,
-              style: const TextStyle(color: Colors.deepPurple),
+              style: TextStyle(color: Colors.purple[200]),
               underline: Container(
                 height: 1,
-                color: Colors.deepPurpleAccent,
+                color: Colors.purple[300],
               ),
               items: <String>[
                 '*SELECT COUNTRY *',
@@ -125,9 +136,9 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             const SizedBox(
-              height: 50,
+              height: 60,
             ),
-            //RADIO
+            //RADIO:
 
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -184,12 +195,23 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             const SizedBox(
-              height: 50,
+              height: 60,
             ),
-            //CHECKBOX
+            //CHECKBOX:
 
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const Text(
+                  "* Choose the Required Options *",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.blueGrey),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
                 Row(
                   children: [
                     Checkbox(
@@ -271,9 +293,9 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             const SizedBox(
-              height: 50,
+              height: 60,
             ),
-            //DATE_PICKER
+            //DATE_PICKER:
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -282,8 +304,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       showDatePicker(
                         context: context,
                         initialDate: DateTime.now(),
-                        firstDate: DateTime(2020),
-                        lastDate: DateTime(2025),
+                        firstDate: DateTime(1990),
+                        lastDate: DateTime(2023),
                       ).then((value) {
                         setState(() {
                           _dateTime = value!;
@@ -291,7 +313,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       });
                     },
                     child: Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       color: Colors.grey[800],
                       child: const Text(
                         "*  Select Date_of_Birth *",
@@ -301,10 +323,13 @@ class _MyHomePageState extends State<MyHomePage> {
                             color: Colors.white),
                       ),
                     )),
+                const SizedBox(
+                  height: 10,
+                ),
                 Row(
                   children: [
                     const Text(
-                      "   ∆  ",
+                      "   »  ",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.normal,
@@ -334,15 +359,96 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ],
-            )
+            ),
 
-            /*  DatePickerDialog(
-                initialDate: DateTime.now(),
-                firstDate: DateTime(2020),
-                lastDate: DateTime(2023)) */
+            const SizedBox(
+              height: 60,
+            ),
+            //DATE_RANGE_PICKER:
+
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextButton(
+                    onPressed: () async {
+                      final d = await showDateRangePicker(
+                        context: context,
+                        firstDate: DateTime(2020),
+                        lastDate: DateTime(2025),
+                      );
+                      setState(() {
+                        // dateRange = d.toString();
+                        log((start?.day).toString());
+                        start = d?.start;
+
+                        log((end?.day).toString());
+                        end = d?.end;
+                      });
+                      // var x = d?.start.toIso8601String();
+                      // var x = DateFormat("yyyy-MM-dd").format(start);
+
+                      // log(x.toString());
+                      // log(d);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      color: Colors.grey[800],
+                      child: const Text(
+                        "*  Select Range_of_date Preffered *",
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.white),
+                      ),
+                    )),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      "   »  ",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.lightGreenAccent),
+                    ),
+                    Text(
+                      ("${start?.day}/${start?.month}/${start?.year}      to    ") /*  . substring(0, 10) + dateRange.substring(27,37) */,
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.yellow),
+                    ),
+                    Text(
+                      ("${end?.day}/${end?.month}/${end?.year} ") /*  . substring(0, 10) + dateRange.substring(27,37) */,
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.yellow),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ],
         ))),
       ),
     );
   }
 }
+
+
+
+
+/* 
+
+`¡™£¢∞§¶•ªº–≠
+œ∑´®†¥¨ˆøπ“‘«»
+åß∂ƒ©˙∆˚¬…æ
+≈ç√∫˜µ≤≥÷
+⁄€‹›ﬁﬂ‡°·‚—±
+ Í˝ÓÔÒÚÆ
+ ¸˛Ç◊˜Â¯˘¿
+
+ */
